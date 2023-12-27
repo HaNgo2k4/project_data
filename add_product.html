@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        Ten san pham <input type="text" id="name" autocomplete="off"/> <br>
+        Gia tien: <input type="number" id="price" autocomplete="off"/> <br>
+        Anh <input type="file" id="image" onchange="previewfile()" /> <br>
+        <img id="img_preview" src="" height="200" alt="Image preview"/> <br>
+        <button type="button" onclick="saveNew()">Save</button>
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+    <script>
+        function previewfile() {
+        const preview = document.querySelector("#img_preview");
+        const file = document.querySelector("#image").files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", () => {
+            preview.src = reader.result;
+        }
+        );
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function saveNew() {
+        ten_sp = document.querySelector("#name").value;
+        gia_tien = document.querySelector("#price").value;
+        hinh_anh = document.querySelector("#img_preview").getAttribute("src");
+
+        opt = {
+            url : 'http://localhost:3000/products',
+            method : 'post',
+            data: {
+                name: ten_sp,
+                price: Number(gia_tien),
+                image: hinh_anh
+            }
+        }
+
+        axios(opt)
+        .then( (data_res) => {
+            console.log(data_res);
+            if(data_res.status == 201)
+                alert('Them moi thanh cong')
+        })
+        .catch( (ex) => {
+            console.log(ex);
+        })
+    }
+    </script>
+</body>
+</html>
