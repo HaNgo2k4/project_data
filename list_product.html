@@ -38,7 +38,7 @@
             localStorage.setItem("myCart", JSON.stringify(myCart));
         }
 
-        axios.get('http://localhost:3000/products')
+        axios.get('https://hango2k4.github.io/project_data/db.json')
         .then((data_res) => {
             console.log(data_res);
             str_li = '';
