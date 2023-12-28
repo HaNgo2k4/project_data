@@ -38,7 +38,7 @@
             localStorage.setItem("myCart", JSON.stringify(myCart));
         }
 
-        axios.get('https://ngoha.42web.io/db.json')
+        axios.get('https://my-json-server.typicode.com/HaNgo2k4/project_data/products')
         .then((data_res) => {
             console.log(data_res);
             str_li = '';
